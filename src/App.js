@@ -1,5 +1,15 @@
+const LottoController = require('./controller/LottoController');
+
 class App {
-  play() {}
+  #lottoCtrl;
+
+  constructor() {
+    this.#lottoCtrl = new LottoController();
+  }
+
+  play() {
+    this.#lottoCtrl.gameStart();
+  }
 }
 
 const app = new App();
