@@ -1,3 +1,4 @@
+const Lotto = require('../Lotto');
 const LottoGame = require('../LottoGame');
 const LottoGenerator = require('../LottoGenerator');
 const Validator = require('../Validator');
@@ -28,6 +29,12 @@ class LottoController {
   printLottos() {
     OutputView.parchaseNotice(this.#lottoGame.getLottosCount());
     OutputView.lottos(this.#lottoGame.getLottos());
+
+    InputView.askWinningNumbers(this.winningNumbersHandler.bind(this));
+  }
+
+  winningNumbersHandler(winningNumbers) {
+    this.#lotto = new Lotto(winningNumbers);
   }
 }
 

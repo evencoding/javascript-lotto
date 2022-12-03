@@ -5,7 +5,7 @@ const LottoGenerator = {
     const lottos = Array.from({ length: count }, () => {
       const lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
 
-      return lotto;
+      return lotto.sort((a, b) => a - b);
     });
 
     return lottos;

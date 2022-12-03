@@ -2,7 +2,8 @@ class LottoGame {
   #lottos;
 
   constructor(lottos) {
-    this.#lottos = lottos.sort((a, b) => a - b);
+    this.#lottos = lottos;
+    console.log(this.#lottos);
   }
 
   getLottos() {

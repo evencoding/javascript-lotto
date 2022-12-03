@@ -14,6 +14,25 @@ const Validator = {
     }
   },
 
+  validateWinningNumbers(numbers) {
+    const regex = /^(\d+,){5}\d+$/;
+    this.throwErrorIfIncludesBlank(numbers);
+    if (!regex.test(numbers)) {
+      this.throwError('6개의 숫자를 ,로 구분해 입력해주세요.');
+    }
+    if (new Set(numbers.split(',')).size !== 6) {
+      this.throwError('중복되지 않는 숫자 6개를 입력해주세요.');
+    }
+    numbers.split(',').forEach((number) => {
+      if (number[0] === '0') {
+        this.throwError('0으로 시작하는 숫자는 입력할 수 없습니다.');
+      }
+      if (number < 1 || number > 45) {
+        this.throwError('1과 45 사이의 숫자를 입력해주세요.');
+      }
+    });
+  },
+
   throwErrorIfIncludesBlank(numbers) {
     if (numbers.includes(' ')) {
       this.throwError('입력에 공백을 포함할 수 없습니다.');
