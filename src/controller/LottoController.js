@@ -1,3 +1,4 @@
+const Validator = require('../Validator');
 const InputView = require('../views/InputView');
 
 class LottoController {
@@ -8,6 +9,7 @@ class LottoController {
   }
 
   bugetHandler(buget) {
+    Validator.checkBugetValidate(buget);
     console.log(buget);
   }
 }
