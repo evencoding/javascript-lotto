@@ -6,7 +6,6 @@ class Lotto {
   constructor(numbers) {
     Validator.validateWinningNumbers(numbers);
     this.#numbers = numbers.split(',').map(Number);
-    console.log(this.#numbers);
   }
 
   // TODO: 추가 기능 구현
