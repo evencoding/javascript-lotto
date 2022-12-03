@@ -8,7 +8,9 @@ class Lotto {
     this.#numbers = numbers.split(',').map(Number);
   }
 
-  // TODO: 추가 기능 구현
+  getLotto() {
+    return this.#numbers;
+  }
 }
 
 module.exports = Lotto;

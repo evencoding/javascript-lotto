@@ -35,6 +35,15 @@ class LottoController {
 
   winningNumbersHandler(winningNumbers) {
     this.#lotto = new Lotto(winningNumbers);
+
+    InputView.askBonusNumber(this.bonusNumberHandler.bind(this));
+  }
+
+  bonusNumberHandler(number) {
+    Validator.validateBonusNumber({
+      number,
+      winningNumbers: this.#lotto.getLotto(),
+    });
   }
 }
 
