@@ -1,6 +1,6 @@
 const Validator = {
   throwError(message) {
-    throw `[ERROR] ${message}`;
+    throw new Error(`[ERROR] ${message}`);
   },
 
   checkBugetValidate(buget) {
