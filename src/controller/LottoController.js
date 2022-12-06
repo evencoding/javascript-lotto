@@ -73,11 +73,11 @@ class LottoController {
 
     OutputView.printWinningStats(winningState);
 
-    this.#printRateOfReturn();
+    this.#printRateOfReturn(winningState);
   }
 
-  #printRateOfReturn() {
-    const rateOfReturn = this.#lottoGame.getRateOfReturn();
+  #printRateOfReturn(winningState) {
+    const rateOfReturn = this.#lottoGame.getRateOfReturn(winningState);
 
     OutputView.printRateOfReturn(rateOfReturn);
 

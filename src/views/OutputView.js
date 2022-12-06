@@ -23,6 +23,10 @@ const OutputView = {
 5개 일치, 보너스 볼 일치(30000000원)- ${state.second}개
 6개 일치 (2000000000원)- ${state.first}개`);
   },
+
+  printRateOfReturn(rateOfReturn) {
+    Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
+  },
 };
 
 module.exports = OutputView;

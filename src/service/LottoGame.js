@@ -1,7 +1,11 @@
 const { Random } = require('@woowacourse/mission-utils');
+
 const Lotto = require('../Lotto');
-const JudgeBot = require('../utils/JudgeBot');
+
 const Validator = require('../utils/Validator');
+const JudgeBot = require('../utils/JudgeBot');
+
+const PRIZE = require('../constants');
 
 class LottoGame {
   #lotto;
@@ -46,7 +50,16 @@ class LottoGame {
     return state;
   }
 
-  getRateOfReturn() {}
+  getRateOfReturn(winningState) {
+    const totalPrize = Object.entries(winningState).reduce((acc, cur) => {
+      const key = cur[0];
+      const value = cur[1];
+
+      return acc + value * PRIZE[key];
+    }, 0);
+
+    return (totalPrize / (this.#lottos.length * 10)).toFixed(1);
+  }
 }
 
 module.exports = LottoGame;
