@@ -62,6 +62,12 @@ class LottoController {
   #handleBonusNumber(bonusNumber) {
     const errrorMessage = this.#lottoGame.validateBonusNumber(bonusNumber);
     if (errrorMessage) this.#handleError(errrorMessage);
+
+    this.#printWinningStats();
+  }
+
+  #printWinningStats() {
+    const ranks = this.#lottoGame.getRanks();
   }
 
   #handleError(errorMessage) {
