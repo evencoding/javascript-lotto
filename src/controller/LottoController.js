@@ -43,6 +43,16 @@ class LottoController {
 
   #printLottos(lottos) {
     OutputView.printLottos(lottos);
+
+    this.#inputWinningNumbers();
+  }
+
+  #inputWinningNumbers() {
+    InputView.askWinningNumbers(this.#handleWinningNumbers.bind(this));
+  }
+
+  #handleWinningNumbers(winningNumbers) {
+    console.log(winningNumbers);
   }
 }
 
