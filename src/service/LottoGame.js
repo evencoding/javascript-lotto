@@ -52,13 +52,13 @@ class LottoGame {
 
   getRateOfReturn(winningState) {
     const totalPrize = Object.entries(winningState).reduce((acc, cur) => {
-      const key = cur[0];
-      const value = cur[1];
-
+      const [key, value] = cur;
       return acc + value * PRIZE[key];
     }, 0);
 
-    return (totalPrize / (this.#lottos.length * 10)).toFixed(1);
+    return (totalPrize / (this.#lottos.length * 10)).toLocaleString('ko-KR', {
+      maximumFractionDigits: 1,
+    });
   }
 }
 
