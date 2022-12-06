@@ -1,9 +1,9 @@
 const LottoGame = require('../service/LottoGame');
 
-const Validator = require('../Validator');
-
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
+
+const Validator = require('../Validator');
 
 class LottoController {
   #lottoGame;
@@ -32,6 +32,17 @@ class LottoController {
 
   #buyLottos(count) {
     const lottos = this.#lottoGame.generateLottos(count);
+
+    this.#printParchaseNotification(count);
+    this.#printLottos(lottos);
+  }
+
+  #printParchaseNotification(count) {
+    OutputView.printParchaseNotification(count);
+  }
+
+  #printLottos(lottos) {
+    OutputView.printLottos(lottos);
   }
 }
 
