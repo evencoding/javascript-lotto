@@ -1,9 +1,11 @@
+const { Console } = require('@woowacourse/mission-utils');
+
 const LottoGame = require('../service/LottoGame');
 
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 
-const Validator = require('../Validator');
+const Validator = require('../utils/Validator');
 
 class LottoController {
   #lottoGame;
@@ -67,7 +69,23 @@ class LottoController {
   }
 
   #printWinningStats() {
-    const ranks = this.#lottoGame.getRanks();
+    const winningState = this.#lottoGame.getWinningState();
+
+    OutputView.printWinningStats(winningState);
+
+    this.#printRateOfReturn();
+  }
+
+  #printRateOfReturn() {
+    const rateOfReturn = this.#lottoGame.getRateOfReturn();
+
+    OutputView.printRateOfReturn(rateOfReturn);
+
+    this.#gameExit();
+  }
+
+  #gameExit() {
+    Console.close();
   }
 
   #handleError(errorMessage) {

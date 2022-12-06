@@ -1,6 +1,7 @@
 const { Random } = require('@woowacourse/mission-utils');
 const Lotto = require('../Lotto');
-const Validator = require('../Validator');
+const JudgeBot = require('../utils/JudgeBot');
+const Validator = require('../utils/Validator');
 
 class LottoGame {
   #lotto;
@@ -12,9 +13,11 @@ class LottoGame {
   }
 
   generateLottos(count) {
-    return Array.from({ length: count }).map(() =>
+    this.#lottos = Array.from({ length: count }).map(() =>
       Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b)
     );
+
+    return this.#lottos;
   }
 
   handleWinningNumbers(numbers) {
@@ -32,6 +35,18 @@ class LottoGame {
 
     return errorMessage;
   }
+
+  getWinningState() {
+    const state = JudgeBot.getResult(
+      this.#lottos,
+      this.#lotto.getLottoNumbers(),
+      this.#bonusNumber
+    );
+
+    return state;
+  }
+
+  getRateOfReturn() {}
 }
 
 module.exports = LottoGame;

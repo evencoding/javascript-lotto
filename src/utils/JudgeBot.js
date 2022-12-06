@@ -7,16 +7,12 @@ const JudgeBot = {
     fifth: 0,
   },
 
-  getRanks(lottos, winningNumbers, bonusNumber) {
+  getResult(lottos, winningNumbers, bonusNumber) {
     lottos.forEach((lotto) => {
       const matchCount = this.getMatchCount(lotto, winningNumbers);
       const isMatchBonus = lotto.includes(bonusNumber);
 
-      if (matchCount === 6) this.results.first += 1;
-      if (matchCount === 5 && isMatchBonus) this.results.second += 1;
-      if (matchCount === 5 && !isMatchBonus) this.results.third += 1;
-      if (matchCount === 4) this.results.fourth += 1;
-      if (matchCount === 3) this.results.fifth += 1;
+      this.updateResults(matchCount, isMatchBonus);
     });
 
     return this.results;
@@ -24,6 +20,14 @@ const JudgeBot = {
 
   getMatchCount(lotto, winningNumbers) {
     return lotto.filter((number) => winningNumbers.includes(number)).length;
+  },
+
+  updateResults(matchCount, isMatchBonus) {
+    if (matchCount === 6) this.results.first += 1;
+    else if (matchCount === 5 && isMatchBonus) this.results.second += 1;
+    else if (matchCount === 5) this.results.third += 1;
+    else if (matchCount === 4) this.results.fourth += 1;
+    else if (matchCount === 3) this.results.fifth += 1;
   },
 };
 

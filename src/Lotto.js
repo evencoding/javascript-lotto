@@ -1,4 +1,4 @@
-const Validator = require('./Validator');
+const Validator = require('./utils/Validator');
 
 class Lotto {
   #numbers;
@@ -16,8 +16,6 @@ class Lotto {
   getLottoNumbers() {
     return this.#numbers;
   }
-
-  // TODO: 추가 기능 구현
 }
 
 module.exports = Lotto;
