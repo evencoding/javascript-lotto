@@ -13,4 +13,9 @@ describe('로또 클래스 테스트', () => {
       new Lotto([1, 2, 3, 4, 5, 5]);
     }).toThrow('[ERROR]');
   });
+
+  test('로또 번호를 가져오는 테스트', () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    expect(lotto.getLottoNumbers()).toEqual([1, 2, 3, 4, 5, 6]);
+  });
 });

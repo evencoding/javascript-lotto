@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const Validator = require('./utils/Validator');
 
 class Lotto {
@@ -5,12 +6,15 @@ class Lotto {
 
   constructor(numbers) {
     this.#numbers = numbers;
+    this.#validator(numbers);
   }
 
-  getErrorMessage() {
+  #validator() {
     const message = Validator.getErrorMessageIfInValidNumbers(this.#numbers);
-
-    return message;
+    if (message) {
+      Console.print(`[ERROR] ${message}`);
+      throw new Error(`[ERROR]`);
+    }
   }
 
   getLottoNumbers() {

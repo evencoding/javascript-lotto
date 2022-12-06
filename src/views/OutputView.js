@@ -1,31 +1,28 @@
 const { Console } = require('@woowacourse/mission-utils');
 
+const { MESSAGE } = require('../constants');
+
 const OutputView = {
   printErrorMessage(message) {
-    Console.print(`[ERROR] ${message}`);
+    Console.print(MESSAGE.error(message));
   },
 
   printParchaseNotification(count) {
-    Console.print(`\n${count}개를 구매했습니다.`);
+    Console.print(MESSAGE.parchaseNotification(count));
   },
 
   printLottos(lottos) {
     lottos.forEach((lotto) => {
-      Console.print(`[${lotto.join(', ')}]`);
+      Console.print(MESSAGE.lotto(lotto));
     });
   },
 
   printWinningStats(state) {
-    Console.print('\n당첨 통계\n---');
-    Console.print(`3개 일치 (5000원)- ${state.fifth}개
-4개 일치 (50000원)- ${state.fourth}개
-5개 일치 (1500000원)- ${state.third}개
-5개 일치, 보너스 볼 일치(30000000원)- ${state.second}개
-6개 일치 (2000000000원)- ${state.first}개`);
+    Console.print(MESSAGE.winningStats(state));
   },
 
   printRateOfReturn(rateOfReturn) {
-    Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
+    Console.print(MESSAGE.rateOfReturn(rateOfReturn));
   },
 };
 

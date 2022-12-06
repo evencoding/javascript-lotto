@@ -5,29 +5,26 @@ const Lotto = require('../Lotto');
 const Validator = require('../utils/Validator');
 const JudgeBot = require('../utils/JudgeBot');
 
-const PRIZE = require('../constants');
+const { PRIZE, LOTTO, GAME } = require('../constants');
 
 class LottoGame {
   #lotto;
   #bonusNumber;
   #lottos;
 
-  constructor() {
-    this.#lotto = new Lotto();
-  }
-
   generateLottos(count) {
     this.#lottos = Array.from({ length: count }).map(() =>
-      Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b)
+      Random.pickUniqueNumbersInRange(
+        LOTTO.MIN_NUMBER,
+        LOTTO.MAX_NUMBER,
+        LOTTO.MAX_COUNT
+      ).sort((a, b) => a - b)
     );
-
     return this.#lottos;
   }
 
   handleWinningNumbers(numbers) {
     this.#lotto = new Lotto(numbers.split(',').map(Number));
-
-    return this.#lotto.getErrorMessage();
   }
 
   validateBonusNumber(number) {
@@ -56,9 +53,12 @@ class LottoGame {
       return acc + value * PRIZE[key];
     }, 0);
 
-    return (totalPrize / (this.#lottos.length * 10)).toLocaleString('ko-KR', {
-      maximumFractionDigits: 1,
-    });
+    return ((totalPrize / (this.#lottos.length * 1000)) * 100).toLocaleString(
+      'ko-KR',
+      {
+        maximumFractionDigits: GAME.MAXINUM_DIGITS,
+      }
+    );
   }
 }
 

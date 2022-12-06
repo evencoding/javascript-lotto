@@ -6,6 +6,7 @@ const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 
 const Validator = require('../utils/Validator');
+const { LOTTO, ERROR_FORM } = require('../constants');
 
 class LottoController {
   #lottoGame;
@@ -26,7 +27,7 @@ class LottoController {
     const errorMessage = Validator.getErrorMessageIfInValidBudget(budget);
     if (errorMessage) this.#handleError(errorMessage);
 
-    this.#buyLottos(budget / 1000);
+    this.#buyLottos(budget / LOTTO.PRICE);
   }
 
   #buyLottos(count) {
@@ -51,8 +52,7 @@ class LottoController {
   }
 
   #handleWinningNumbers(winningNumbers) {
-    const errorMessage = this.#lottoGame.handleWinningNumbers(winningNumbers);
-    if (errorMessage) this.#handleError(errorMessage);
+    this.#lottoGame.handleWinningNumbers(winningNumbers);
 
     this.#inputBonusNumber();
   }
@@ -90,7 +90,7 @@ class LottoController {
 
   #handleError(errorMessage) {
     OutputView.printErrorMessage(errorMessage);
-    throw new Error('[ERROR]');
+    throw new Error(ERROR_FORM);
   }
 }
 

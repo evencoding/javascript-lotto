@@ -1,32 +1,35 @@
+const { REGEX, ERROR_MESSAGE, LOTTO } = require('../constants');
+
 const Validator = {
   getErrorMessageIfInValidBudget(budget) {
-    const regex = /^[1-9]\d+$/;
-    if (!regex.test(budget)) return '숫자만 입력해주세요.';
-    if (budget.includes(' ')) return '공백은 입력할 수 없습니다.';
-    if (budget % 1000 !== 0) return '1000원 단위로 입력해주세요.';
+    if (!REGEX.MONEY.test(budget)) return ERROR_MESSAGE.INVALID_NUMBER;
+    if (budget.includes(' ')) return ERROR_MESSAGE.INCLUDES_BLANK;
+    if (budget % LOTTO.PRICE !== 0) return ERROR_MESSAGE.INVALID_MONEY;
 
     return '';
   },
 
   getErrorMessageIfInValidNumbers(numbers) {
+    if (numbers.length !== 6) return ERROR_MESSAGE.INVALID_LENGTH;
+    if (new Set(numbers).size < 6) return ERROR_MESSAGE.HAS_DUPLICATED;
+
     for (number of numbers) {
-      if (number < 1 || number > 45) return '1~45의 숫자를 입력해주세요.';
-      if (Number.isNaN(number)) return '숫자만 입력해주세요.';
-      if (numbers.indexOf(number) !== numbers.lastIndexOf(number)) {
-        return '중복된 숫자는 입력할 수 없습니다.';
-      }
+      if (Number.isNaN(number)) return ERROR_MESSAGE.INVALID_NUMBER;
+      if (number < 1 || number > 45) return ERROR_MESSAGE.INVALID_RANGE;
     }
+
     return '';
   },
 
   getErrorMessageIfInValidBonus(bonusNumber, winningNumbers) {
-    const regex = /^[1-9]\d*$/;
-    if (!regex.test(bonusNumber)) return '숫자만 입력해주세요.';
+    if (!REGEX.BONUS_NUMBER.test(bonusNumber)) {
+      return ERROR_MESSAGE.INVALID_NUMBER;
+    }
     if (bonusNumber < 1 || bonusNumber > 45) {
-      return '1~45의 숫자를 입력해주세요.';
+      return ERROR_MESSAGE.INVALID_RANGE;
     }
     if (winningNumbers.includes(Number(bonusNumber))) {
-      return '당첨 번호에 포함된 번호를 입력할 수 없습니다';
+      return ERROR_MESSAGE.INVALID_BONUS_NUMBER;
     }
 
     return '';
