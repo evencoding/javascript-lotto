@@ -21,11 +21,8 @@ class LottoController {
   }
 
   #validateBudget(budget) {
-    const message = Validator.getErrorMessageIfInValidBudget(budget);
-    if (message) {
-      OutputView.printErrorMessage(message);
-      throw new Error('[ERROR]');
-    }
+    const errorMessage = Validator.getErrorMessageIfInValidBudget(budget);
+    if (errorMessage) this.#handleError(errorMessage);
 
     this.#buyLottos(budget / 1000);
   }
@@ -52,7 +49,24 @@ class LottoController {
   }
 
   #handleWinningNumbers(winningNumbers) {
-    console.log(winningNumbers);
+    const errorMessage = this.#lottoGame.handleWinningNumbers(winningNumbers);
+    if (errorMessage) this.#handleError(errorMessage);
+
+    this.#inputBonusNumber();
+  }
+
+  #inputBonusNumber() {
+    InputView.askBonusNumber(this.#handleBonusNumber.bind(this));
+  }
+
+  #handleBonusNumber(bonusNumber) {
+    const errrorMessage = this.#lottoGame.validateBonusNumber(bonusNumber);
+    if (errrorMessage) this.#handleError(errrorMessage);
+  }
+
+  #handleError(errorMessage) {
+    OutputView.printErrorMessage(errorMessage);
+    throw new Error('[ERROR]');
   }
 }
 
