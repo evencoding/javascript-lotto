@@ -24,6 +24,22 @@ class BridgeController {
 
   #onInputBridgeSize(size) {
     this.#bridgeGame = new BridgeGame(size);
+
+    this.#inputDirection();
+  }
+
+  #inputDirection() {
+    InputView.askDirection(this.#validateDirection.bind(this));
+  }
+
+  #validateDirection(direction) {
+    // Validate direction
+
+    this.#onInputDirection(direction);
+  }
+
+  #onInputDirection(direction) {
+    console.log(direction);
   }
 }
 
