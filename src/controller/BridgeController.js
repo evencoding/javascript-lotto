@@ -39,7 +39,24 @@ class BridgeController {
   }
 
   #onInputDirection(direction) {
-    this.#bridgeGame.move(direction);
+    const { isCorrectDirection, bridgeMap } = this.#bridgeGame.move(direction);
+    this.#printBridgeMap(bridgeMap);
+
+    if (!isCorrectDirection) {
+      return this.#inputRetryCommand();
+    }
+
+    return this.#checkClear();
+  }
+
+  #inputRetryCommand() {}
+
+  #checkClear() {
+    const isCleared = this.#bridgeGame.getGameStatus();
+  }
+
+  #printBridgeMap(bridgeMap) {
+    OutputView.printBridgeMap(bridgeMap);
   }
 }
 

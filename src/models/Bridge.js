@@ -22,8 +22,8 @@ class Bridge {
     return { isCorrectDirection, bridgeMap: this.getMap() };
   }
 
-  drawMap(isCorrectDirection, direction) {
-    const otherDirection = this.getOtherDirection(direction);
+  #drawMap(isCorrectDirection, direction) {
+    const otherDirection = this.#getOtherDirection(direction);
     if (isCorrectDirection) {
       this.#map[direction].push('O');
       this.#map[otherDirection].push(' ');
@@ -33,12 +33,16 @@ class Bridge {
     }
   }
 
-  getOtherDirection(direction) {
+  #getOtherDirection(direction) {
     return direction === 'U' ? 'D' : 'U';
   }
 
   getMap() {
     return this.#map;
+  }
+
+  getBridgeSize() {
+    return this.#bridge.length;
   }
 }
 

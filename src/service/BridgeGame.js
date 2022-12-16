@@ -1,4 +1,3 @@
-const BridgeMap = require('../models/BridgeMap');
 const Progress = require('../models/GameProgress');
 
 const { makeBridge } = require('../BridgeMaker');
@@ -27,7 +26,19 @@ class BridgeGame {
     return { isCorrectDirection, bridgeMap };
   }
 
-  retry() {}
+  retry() {
+    this.#progress.initProgress();
+    this.#bridge.initMap();
+  }
+
+  getGameStatus() {
+    const bridgeSize = this.#bridge.getBridgeSize();
+    const { nextCellIndex } = this.#progress.getProgress();
+
+    return bridgeSize === nextCellIndex;
+  }
+
+  getGameResult() {}
 }
 
 module.exports = BridgeGame;
