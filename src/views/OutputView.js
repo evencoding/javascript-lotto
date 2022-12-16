@@ -8,6 +8,13 @@ const OutputView = {
   printStartGameMessage() {
     Console.print(MESSAGE.START_GAME);
   },
+
+  printBridgeMap(bridgeMap) {
+    const maps = Object.values(bridgeMap);
+    maps.forEach((map) => {
+      Console.print(`[ ${map.join(' | ')} ]`);
+    });
+  },
 };
 
 module.exports = OutputView;
