@@ -1,8 +1,8 @@
 const Progress = require('../models/GameProgress');
+const Bridge = require('../models/Bridge');
 
 const { makeBridge } = require('../BridgeMaker');
 const { generate } = require('../utils/BridgeRandomNumberGenerator');
-const Bridge = require('../models/Bridge');
 
 class BridgeGame {
   #bridge;
@@ -38,7 +38,12 @@ class BridgeGame {
     return bridgeSize === nextCellIndex;
   }
 
-  getGameResult() {}
+  getGameResult() {
+    const bridgeMap = this.#bridge.getMap();
+    const { tryCount } = this.#progress.getProgress();
+
+    return { bridgeMap, tryCount };
+  }
 }
 
 module.exports = BridgeGame;

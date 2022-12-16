@@ -1,3 +1,5 @@
+const { Console } = require('@woowacourse/mission-utils');
+
 const BridgeGame = require('../service/BridgeGame');
 
 const InputView = require('../views/InputView');
@@ -8,7 +10,7 @@ class BridgeController {
 
   commandHandler = {
     R: this.#retryGame.bind(this),
-    Q: this.#printGameResult.bind(this),
+    Q: this.#printGameResult.bind(this, false),
   };
 
   startGame() {
@@ -61,7 +63,7 @@ class BridgeController {
   #validateRetryCommand(command) {
     // Validate retry command
 
-    commandHandler[command]();
+    this.commandHandler[command]();
   }
 
   #checkClear() {
@@ -79,7 +81,16 @@ class BridgeController {
     this.#inputDirection();
   }
 
-  #printGameResult() {}
+  #printGameResult(isClear = true) {
+    const { bridgeMap, tryCount } = this.#bridgeGame.getGameResult();
+    OutputView.printGameResult(bridgeMap, isClear, tryCount);
+
+    this.#exitGame();
+  }
+
+  #exitGame() {
+    Console.close();
+  }
 }
 
 module.exports = BridgeController;

@@ -5,7 +5,7 @@ class Progress {
 
   constructor() {
     this.initProgress();
-    this.#tryCount = 0;
+    this.#tryCount = 1;
   }
 
   initProgress() {
@@ -22,10 +22,6 @@ class Progress {
       nextCellIndex: this.#nextCellIndex,
       tryCount: this.#tryCount,
     };
-  }
-
-  increaseTryCount() {
-    this.#tryCount += 1;
   }
 }
 
