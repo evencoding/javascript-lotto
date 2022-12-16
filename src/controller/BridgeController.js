@@ -39,7 +39,7 @@ class BridgeController {
   }
 
   #onInputDirection(direction) {
-    console.log(direction);
+    this.#bridgeGame.move(direction);
   }
 }
 
