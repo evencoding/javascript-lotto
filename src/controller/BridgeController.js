@@ -7,6 +7,18 @@ class BridgeController {
 
     this.#inputBridgeSize();
   }
+
+  #inputBridgeSize() {
+    InputView.askBridgeSize(this.#validateBridgeSize.bind(this));
+  }
+
+  #validateBridgeSize(size) {
+    // Validate size
+
+    this.#onInputBridgeSize(size);
+  }
+
+  #onInputBridgeSize(size) {}
 }
 
 module.exports = BridgeController;
