@@ -6,6 +6,11 @@ const OutputView = require('../views/OutputView');
 class BridgeController {
   #bridgeGame;
 
+  commandHandler = {
+    R: this.#retryGame.bind(this),
+    Q: this.#printGameResult.bind(this),
+  };
+
   startGame() {
     OutputView.printStartGameMessage();
 
@@ -49,7 +54,15 @@ class BridgeController {
     this.#checkClear();
   }
 
-  #inputRetryCommand() {}
+  #inputRetryCommand() {
+    InputView.askRetryCommand(this.#validateRetryCommand.bind(this));
+  }
+
+  #validateRetryCommand(command) {
+    // Validate retry command
+
+    commandHandler[command]();
+  }
 
   #checkClear() {
     const isCleared = this.#bridgeGame.getGameStatus();
@@ -58,6 +71,12 @@ class BridgeController {
     }
 
     this.#printGameResult();
+  }
+
+  #retryGame() {
+    this.#bridgeGame.retry();
+
+    this.#inputDirection();
   }
 
   #printGameResult() {}
