@@ -6,6 +6,8 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const numbers = Array.from({ length: size }, () => generateRandomNumber());
+
+    return numbers.map((number) => (number === 1 ? 'U' : 'D'));
   },
 };
 
